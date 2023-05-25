@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Proposta de Casamento</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      background-repeat: repeat;
+      background-size: 50% auto; /* Alteração: preencher com imagem em 50% */
+      background-position: center;
+    }
+
+    #question {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+      opacity: 1;
+      transition: opacity 0.3s;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #options {
+      display: flex;
+      justify-content: center;
+    }
+
+    .option {
+      margin: 0 10px;
+      padding: 10px 20px;
+      border: 2px solid #333;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .option.no:hover {
+      position: absolute;
+      top: calc(50% - 25px);
+      left: calc(50% - 75px);
+      transform: none;
+      animation: move 1s infinite;
+    }
+
+    .fireworks {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 9999;
+    }
+
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 28px;
+      text-align: center;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 9999;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes move {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body style="background-image: url('plano.jpg');">
+  <div id="question">
+    Milena, você quer casar comigo?
+  </div>
+  <div id="options">
+    <div class="option" id="yes">Sim</div>
+    <div class="option no">Não</div>
+  </div>
+  <div class="fireworks"></div>
+  <div class="message"></div>
+
+  <script>
+    const question = document.getElementById('question');
+    const yesOption = document.getElementById('yes');
+    const noOption = document.querySelector('.option.no');
+    const fireworks = document.querySelector('.fireworks');
+    const message = document.querySelector('.message');
+    const body = document.querySelector('body');
+
+    noOption.addEventListener('mouseover', () => {
+      const randomLeft = Math.floor(Math.random() * (window.innerWidth - 150));
+      const randomTop = Math.floor(Math.random() * (window.innerHeight - 50));
+      noOption.style.left = randomLeft + 'px';
+      noOption.style.top = randomTop + 'px';
+    });
+
+    yesOption.addEventListener('click', () => {
+      question.style.opacity = '0';
+      yesOption.style.opacity = '0';
+      noOption.style.opacity = '0';
+      fireworks.style.opacity = '1';
+      fireworks.style.pointerEvents = 'auto';
+      fireworks.classList.add('animate');
+      message.style.opacity = '1';
+      message.style.pointerEvents = 'auto';
+      message.textContent = 'Você agora é oficialmente minha Esposa!';
+      body.style.backgroundImage = "url('plano2.jpg')";
+    });
+  </script>
+</body>
+</html>
